@@ -17,82 +17,65 @@ export function NavbarDemo() {
 						<NavLink
 							to="https://campus-to-corporate.vercel.app/leaderboard"
 							className={({ isActive }) =>
-								`transition-colors ${
-									isActive
-										? "text-cyan-300"
-										: "text-slate-300 hover:text-cyan-300"
+								`transition-colors ${isActive
+									? "text-cyan-300"
+									: "text-slate-300 hover:text-cyan-300"
 								}`
 							}
 						>
 							Leaderboard
 						</NavLink>
 						<NavLink
-							to="/contest"
+							to="https://contest-board.vercel.app"
 							className={({ isActive }) =>
-								`transition-colors ${
-									isActive
-										? "text-cyan-300"
-										: "text-slate-300 hover:text-cyan-300"
+								`transition-colors ${isActive
+									? "text-cyan-300"
+									: "text-slate-300 hover:text-cyan-300"
 								}`
 							}
 						>
 							Contests
 						</NavLink>
 						<NavLink
-							to="/code-analyser"
+							to="https://code-analyser-beta.vercel.app"
 							className={({ isActive }) =>
-								`transition-colors ${
-									isActive
-										? "text-cyan-300"
-										: "text-slate-300 hover:text-cyan-300"
+								`transition-colors ${isActive
+									? "text-cyan-300"
+									: "text-slate-300 hover:text-cyan-300"
 								}`
 							}
 						>
 							Code Analyser
 						</NavLink>
 						<NavLink
-							to="/similar-questions"
+							to="https://similar-question-search.vercel.app"
 							className={({ isActive }) =>
-								`transition-colors ${
-									isActive
-										? "text-cyan-300"
-										: "text-slate-300 hover:text-cyan-300"
+								`transition-colors ${isActive
+									? "text-cyan-300"
+									: "text-slate-300 hover:text-cyan-300"
 								}`
 							}
 						>
 							Similar Qs
 						</NavLink>
 						<NavLink
-							to="/notes"
+							to="https://gla-notes.vercel.app"
 							className={({ isActive }) =>
-								`transition-colors ${
-									isActive
-										? "text-cyan-300"
-										: "text-slate-300 hover:text-cyan-300"
+								`transition-colors ${isActive
+									? "text-cyan-300"
+									: "text-slate-300 hover:text-cyan-300"
 								}`
 							}
 						>
 							Notes
 						</NavLink>
+
 						<NavLink
-							to="/pyqs"
+							to="https://companywise-sheet.vercel.app"
 							className={({ isActive }) =>
-								`transition-colors ${
-									isActive
-										? "text-cyan-300"
-										: "text-slate-300 hover:text-cyan-300"
-								}`
-							}
-						>
-							PYQs
-						</NavLink>
-						<NavLink
-							to="/company-sheets"
-							className={({ isActive }) =>
-								`transition-colors ${
-									isActive
-										? "text-cyan-300"
-										: "text-slate-300 hover:text-cyan-300"
+								`transition-colors ${isActive
+									? "text-cyan-300"
+									: "text-slate-300 hover:text-cyan-300"
 								}`
 							}
 						>
