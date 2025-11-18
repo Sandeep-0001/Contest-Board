@@ -106,7 +106,7 @@ export const Row = ({ question }) => {
 				{new Date(question.startTime).toLocaleString()}
 			</td>
 			<td className="px-4 py-3 whitespace-nowrap">
-				<span className="bg-gray-700 border text-sm border-gray-600 rounded-md px-0.5 py-0.5 flex items-center justify-center">
+				<span className="bg-gray-700 border text-sm border-gray-600 rounded-md px-0.5 py-0.5 flex items-center justify-center text-white">
 					{question.duration / 3600}{" "}
 					{question.duration === 1 ? "hour" : "hours"}
 				</span>
