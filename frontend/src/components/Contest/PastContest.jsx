@@ -14,12 +14,12 @@ export const PastContest = () => {
 		let mounted = true;
 		setLoading(true);
 		setError(null);
-		getPastContest((currentPage - 1) * 10, 10, selected)
+		getPastContest((currentPage - 1) * 5, 5, selected)
 			.then(({ documents, total }) => {
 				if (!mounted) return;
 				if (documents) {
 					setPastContest(documents);
-					setTotalPages(Math.ceil(total / 10));
+					setTotalPages(Math.ceil(total / 5));
 				} else {
 					setPastContest([]);
 					setTotalPages(0);
