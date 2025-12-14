@@ -139,59 +139,99 @@ async function fetchGFGUpcoming() {
 }
 
 // Fetch both upcoming and past contests from GFG
+// async function fetchGFGAll() {
+//   const url = "https://practiceapi.geeksforgeeks.org/api/vr/events/?sub_type=all&type=contest";
+//   const { data } = await axios.get(url);
+//   const upcoming = data?.results?.upcoming || [];
+//   const past = data?.results?.past || [];
+
+//   const mapContest = (contest) => {
+//     // GFG times come without timezone; append IST offset and convert
+//     const startIso = new Date(contest.start_time + ".000+05:30").toISOString();
+//     const endIso = new Date(contest.end_time + ".000+05:30").toISOString();
+//     const duration = (new Date(contest.end_time) - new Date(contest.start_time)) / 1000;
+//     const type = contest.name?.includes("Hiring") ? "Hiring" : "Weekly";
+//     return {
+//       name: contest.name,
+//       startTime: startIso,
+//       endTime: endIso,
+//       duration,
+//       link: `https://practice.geeksforgeeks.org/contest/${contest.slug}`,
+//       type,
+//       contestId: `geeksforGeeks_${contest.slug}`,
+//       platform: "GeeksforGeeks",
+//     };
+//   };
+
+//   return {
+//     // include overrides for upcoming if present
+//     upcoming: (() => {
+//       try {
+//         const overridePath = path.join(__dirname, "gfg_override.json");
+//         if (fs.existsSync(overridePath)) {
+//           const raw = fs.readFileSync(overridePath, "utf8");
+//           const parsed = JSON.parse(raw || "{}");
+//           const ov = parsed?.upcoming || [];
+//           if (Array.isArray(ov) && ov.length > 0) {
+//             const seen = new Set(upcoming.map((c) => c.slug));
+//             const merged = [...ov.filter((c) => !seen.has(c.slug)), ...upcoming];
+//             // eslint-disable-next-line no-console
+//             console.log("GFG upcoming merged with override:", merged.length);
+//             return merged.map(mapContest);
+//           }
+//         }
+//       } catch (e) {
+//         // eslint-disable-next-line no-console
+//         console.warn("Failed to apply GFG override:", e.message);
+//       }
+//       // default
+//       // eslint-disable-next-line no-console
+//       console.log("GFG upcoming count:", (upcoming || []).length, "past count:", (past || []).length);
+//       return upcoming.map(mapContest);
+//     })(),
+//     past: past.map(mapContest),
+//   };
+// }
+
 async function fetchGFGAll() {
   const url = "https://practiceapi.geeksforgeeks.org/api/vr/events/?sub_type=all&type=contest";
   const { data } = await axios.get(url);
-  const upcoming = data?.results?.upcoming || [];
-  const past = data?.results?.past || [];
 
-  const mapContest = (contest) => {
-    // GFG times come without timezone; append IST offset and convert
+  const all =
+    [
+      ...(data?.results?.upcoming || []),
+      ...(data?.results?.past || [])
+    ];
+
+  const now = new Date();
+  const upcoming = [];
+  const past = [];
+
+  for (const contest of all) {
     const startIso = new Date(contest.start_time + ".000+05:30").toISOString();
     const endIso = new Date(contest.end_time + ".000+05:30").toISOString();
-    const duration = (new Date(contest.end_time) - new Date(contest.start_time)) / 1000;
-    const type = contest.name?.includes("Hiring") ? "Hiring" : "Weekly";
-    return {
+
+    const mapped = {
       name: contest.name,
       startTime: startIso,
       endTime: endIso,
-      duration,
+      duration: (new Date(endIso) - new Date(startIso)) / 1000,
       link: `https://practice.geeksforgeeks.org/contest/${contest.slug}`,
-      type,
-      contestId: `geeksforGeeks_${contest.slug}`,
+      type: contest.name?.includes("Hiring") ? "Hiring" : "Contest",
+      contestId: `geeksforgeeks_${contest.slug}`,
       platform: "GeeksforGeeks",
     };
-  };
 
-  return {
-    // include overrides for upcoming if present
-    upcoming: (() => {
-      try {
-        const overridePath = path.join(__dirname, "gfg_override.json");
-        if (fs.existsSync(overridePath)) {
-          const raw = fs.readFileSync(overridePath, "utf8");
-          const parsed = JSON.parse(raw || "{}");
-          const ov = parsed?.upcoming || [];
-          if (Array.isArray(ov) && ov.length > 0) {
-            const seen = new Set(upcoming.map((c) => c.slug));
-            const merged = [...ov.filter((c) => !seen.has(c.slug)), ...upcoming];
-            // eslint-disable-next-line no-console
-            console.log("GFG upcoming merged with override:", merged.length);
-            return merged.map(mapContest);
-          }
-        }
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.warn("Failed to apply GFG override:", e.message);
-      }
-      // default
-      // eslint-disable-next-line no-console
-      console.log("GFG upcoming count:", (upcoming || []).length, "past count:", (past || []).length);
-      return upcoming.map(mapContest);
-    })(),
-    past: past.map(mapContest),
-  };
+    if (new Date(endIso) >= now) {
+      upcoming.push(mapped);
+    } else {
+      past.push(mapped);
+    }
+  }
+
+  return { upcoming, past };
 }
+
 
 function filterByPlatforms(items, platforms) {
   if (!platforms || platforms.length === 0) return items;
