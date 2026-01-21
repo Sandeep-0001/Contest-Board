@@ -4,7 +4,7 @@ export const Footer = () => {
 	return (
 		<div className="text-center space-y-5 pt-10 pb-5">
 			<div className="px-20 border border-gray-800"></div>
-			<p>© 2025 CampusToCorporate. All rights reserved.</p>
+			<p>© 2026 CareerPrep AI. All rights reserved.</p>
 		</div>
 	);
 };

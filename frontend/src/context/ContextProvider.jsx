@@ -1,4 +1,4 @@
-import { UserContext } from "./userContext";
+import { UserContext } from "./userContext.js";
 
 export const UserContextProvider = ({ children, fingerprint }) => {
 	return (
