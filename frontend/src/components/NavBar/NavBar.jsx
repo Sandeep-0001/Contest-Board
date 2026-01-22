@@ -6,12 +6,12 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
-    { name: 'Home', href: '#' },
-    { name: 'Practice Platform', href: 'https://example.com/practice' },
-    { name: 'Contests', href: 'https://example.com/contests' },
-    { name: 'Resume Tools', href: 'https://example.com/resume' },
-    { name: 'Study Material', href: 'https://example.com/study' },
-    { name: 'Login', href: 'https://example.com/login' }
+    { name: 'Home', href: 'https://careerprep.tech' },
+    { name: 'Practice Platform', href: 'https://practice.careerprep.tech' },
+    { name: 'Contests', href: 'https://contest.careerprep.tech' },
+    { name: 'Resume Tools', href: 'https://resumegenie.careerprep.tech' },
+    { name: 'Study Material', href: 'https://interview.careerprep.tech' },
+    { name: 'Login', href: 'https://ideathon.careerprep.tech/login' }
   ];
 
   return (
@@ -80,9 +80,9 @@ export default function Navbar() {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
               </a>
             )}
-            <button className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-4 py-2 rounded-lg font-medium mt-2">
+            <a href="https://careerprep.tech" target="_blank" rel="noopener noreferrer" className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-4 py-2 rounded-lg font-medium mt-2 text-center block">
               Get Started Free
-            </button>
+            </a>
           </div>
         </div>
       )}
