@@ -39,11 +39,11 @@ export const Hero = () => {
 						</button>
 						<button
 							onClick={() => {
-								window.location.href = "https://campus-to-corporate.vercel.app/leaderboard";
+								window.location.href = "https://practice.careerprep.tech";
 							}}
 							className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-gray-100 hover:bg-white/10 hover:border-white/30 transition-colors"
 						>
-							<span>Explore leaderboard</span>
+							<span>Practice Now</span>
 							<Link2 size={16} />
 						</button>
 					</div>
